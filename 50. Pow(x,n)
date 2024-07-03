@@ -1,0 +1,31 @@
+class Solution {
+    public double myPow(double x, int n) {
+        if(n>=0){
+           return positive(x,n);
+        } else {
+            return negative(x,n);
+        }
+    }
+    private double positive(double x, int n){
+        if(n==0){
+            return 1;
+        }
+        double small = myPow( x, n/2);
+        if(n%2==0){
+            return small*small;
+        } else {
+            return x*small*small;
+        }
+    }
+    private double negative(double x, int n){
+        if(n==-1){
+            return 1/x;
+        }
+        double big=myPow(x,n/2);
+        if(n%2==0){
+            return big*big;
+        } else {
+            return 1/x*big*big;
+        }
+    }
+}
