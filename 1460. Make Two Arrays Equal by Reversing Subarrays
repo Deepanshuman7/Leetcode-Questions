@@ -1,3 +1,5 @@
+APPROACH - 1 (TIME COMPLEXITY - O(N LOGN)
+
 class Solution {
     public boolean canBeEqual(int[] target, int[] arr) {
        Arrays.sort(target);
@@ -9,5 +11,26 @@ class Solution {
         }
        }
        return true;
+    }
+}
+
+
+APPROACH - 2 (TIME COMPLEXITY - O(N)
+
+class Solution {
+    public boolean canBeEqual(int[] target, int[] arr) {
+        int res[]=new int[1001];
+        for(int i:target){
+            res[i]++;
+        }
+        for(int j:arr){
+            res[j]--;
+        }
+        for(int i =0;i<res.length;i++){
+            if(res[i]!=0){
+                return false;
+            }
+        }
+        return true;
     }
 }
