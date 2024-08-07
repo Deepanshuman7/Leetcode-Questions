@@ -2,7 +2,7 @@ class Solution {
 
     public String solve(int num){
 
-     HashMap<Integer, String> belowten = new HashMap<>();
+    HashMap<Integer, String> belowten = new HashMap<>();
     belowten.put(1,"One");
     belowten.put(2,"Two");
     belowten.put(3,"Three");
