@@ -1,0 +1,70 @@
+class Solution {
+
+    public String solve(int num){
+
+     HashMap<Integer, String> belowten = new HashMap<>();
+    belowten.put(1,"One");
+    belowten.put(2,"Two");
+    belowten.put(3,"Three");
+    belowten.put(4,"Four");
+    belowten.put(5,"Five");
+    belowten.put(6,"Six");
+    belowten.put(7,"Seven");
+    belowten.put(8,"Eight");
+    belowten.put(9,"Nine");
+
+    HashMap<Integer, String> belowtwenty = new HashMap<>();
+    belowtwenty.put(10,"Ten");
+    belowtwenty.put(11,"Eleven");
+    belowtwenty.put(12,"Twelve");
+    belowtwenty.put(13,"Thirteen");
+    belowtwenty.put(14,"Fourteen");
+    belowtwenty.put(15,"Fifteen");
+    belowtwenty.put(16,"Sixteen");
+    belowtwenty.put(17,"Seventeen");
+    belowtwenty.put(18,"Eighteen");
+    belowtwenty.put(19,"Nineteen");
+
+    HashMap<Integer, String> belowhundred = new HashMap<>();
+    belowhundred.put(2,"Twenty");
+    belowhundred.put(3,"Thirty");
+    belowhundred.put(4,"Forty");
+    belowhundred.put(5,"Fifty");
+    belowhundred.put(6,"Sixty");
+    belowhundred.put(7,"Seventy");
+    belowhundred.put(8,"Eighty");
+    belowhundred.put(9,"Ninety");
+
+
+        if(num < 10){
+            return belowten.get(num);
+        }
+        if(num < 20){
+            return belowtwenty.get(num);
+        }
+        if (num < 100) { // 89 = "Eighty Nine"
+            return belowhundred.get(num / 10) + (num % 10 != 0 ? " " + belowten.get(num % 10) : "");
+        }
+
+        if (num < 1000) { // 879 / 100 = 8 "Eight"
+            return solve(num / 100) + " Hundred" + (num % 100 != 0 ? " " + solve(num % 100) : "");
+        }
+
+        if (num < 1000000) {
+            return solve(num / 1000) + " Thousand" + (num % 1000 != 0 ? " " + solve(num % 1000) : "");
+        }
+
+        if (num < 1000000000) {
+            return solve(num / 1000000) + " Million" + (num % 1000000 != 0 ? " " + solve(num % 1000000) : "");
+        }
+
+        return solve(num / 1000000000) + " Billion" + (num % 1000000000 != 0 ? " " + solve(num % 1000000000) : "");
+    }
+
+    public String numberToWords(int num) {
+        if(num==0){
+            return "Zero";
+        }
+        return solve(num);
+    }
+}
