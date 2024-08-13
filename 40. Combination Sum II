@@ -1,0 +1,36 @@
+class Solution {
+
+    public void helper (int index, int[] candidates, int target, ArrayList<Integer> result, 
+                        List<List<Integer>> ans){
+        if(target == 0){
+            ans.add(new ArrayList<>(result));
+            return;
+        } 
+        for(int i=index; i<candidates.length; i++){
+
+            if( i > index && candidates[i] == candidates[i-1]){
+                continue;
+            }
+
+            if(candidates[i] > target) {
+                break;
+            }
+
+                result.add(candidates[i]);
+                helper(i+1, candidates, target-candidates[i], result, ans);
+                result.remove(result.size()-1);  
+
+            }
+        }
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Arrays.sort(candidates);
+
+        ArrayList<Integer> result = new ArrayList<>();
+        List<List<Integer>> ans = new ArrayList<>();
+
+
+        helper(0, candidates, target, result, ans);
+
+        return ans;
+    }
+}
