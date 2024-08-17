@@ -1,0 +1,65 @@
+class pair {
+
+    int val;
+    int fre;
+
+    pair(int val, int fre){
+        this.val = val;
+        this.fre = fre;
+    }
+}
+
+class cmp implements Comparator<pair> {
+    public int compare ( pair p1, pair p2){
+        if( p1.fre == p2.fre){
+            
+            if(p1.val < p2.val){
+                return 1;
+            } else {
+                return -1;
+            }
+        } else {
+
+            if(p1.fre < p2.fre){
+                return -1;
+            } else {
+                return 1;
+            }
+        }
+    }
+}
+
+class Solution {
+    public int[] frequencySort(int[] nums) {
+        int n = nums.length;
+        HashMap<Integer,Integer> map = new HashMap<>();
+
+        for(int i =0;i<n;i++){
+            if(map.containsKey(nums[i])){
+                int old = map.get(nums[i]);
+                map.put(nums[i],old+1);
+            } else {
+                map.put(nums[i],1);
+            }
+        }
+        ArrayList<pair> arr = new ArrayList<>();
+        
+        for(Integer key : map.keySet()){
+            arr.add(new pair (key, map.get(key)));
+        }
+
+        Collections.sort(arr, new cmp());
+
+        int ans [] = new int[n];
+        int idx = 0;
+
+        for(pair p : arr){
+            int fre = p.fre;
+            while(fre > 0){
+                ans[idx++] = p.val;
+                fre--;
+            }
+        }
+        return ans;
+    }
+}
