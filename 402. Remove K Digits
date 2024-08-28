@@ -1,0 +1,33 @@
+class Solution {
+    public String removeKdigits(String num, int k) {
+        Stack<Character> stack = new Stack<>();
+        
+        // Iterate through each digit in the input number
+        for (char digit : num.toCharArray()) {
+            // While we can remove digits, the stack is not empty, and the top of the stack
+            // is greater than the current digit, remove the top element from the stack
+            while (k > 0 && !stack.isEmpty() && stack.peek() > digit) {
+                stack.pop();
+                k--;
+            }
+            stack.push(digit);
+        }
+        
+        // If there are still digits to remove, remove from the end of the stack
+        while (k > 0) {
+            stack.pop();
+            k--;
+        }
+        StringBuilder result = new StringBuilder();
+        for (char c : stack) {
+            result.append(c);
+        }
+        
+        // Convert the result to a string and remove leading zeros
+        String resultStr = result.toString().replaceAll("^0+", "");
+        
+        // If the result is empty, it means the number was zero
+        return resultStr.isEmpty() ? "0" : resultStr;
+
+    }
+}
